@@ -1,0 +1,6 @@
+framework module Pods_AWSRekognitionKjayShieu {
+  umbrella header "Pods-AWSRekognitionKjayShieu-umbrella.h"
+
+  export *
+  module * { export * }
+}
