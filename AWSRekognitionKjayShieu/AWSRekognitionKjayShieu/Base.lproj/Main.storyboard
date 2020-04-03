@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jeff_portrait.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Oe-6n-m4y">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_4106.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="9Oe-6n-m4y">
                                 <rect key="frame" x="62" y="125" width="290" height="190"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="290" id="F6c-5D-Y0C"/>
@@ -160,7 +160,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="IMG_4106.JPG" width="4032" height="3024"/>
         <image name="Me.jpg" width="200" height="200"/>
-        <image name="jeff_portrait.png" width="484" height="323"/>
     </resources>
 </document>

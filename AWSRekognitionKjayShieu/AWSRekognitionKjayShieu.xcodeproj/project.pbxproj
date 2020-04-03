@@ -15,6 +15,7 @@
 		8483963E2433854F00A8F6D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8483963C2433854F00A8F6D4 /* LaunchScreen.storyboard */; };
 		8483964624362C7100A8F6D4 /* jeff_portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 8483964524362C7100A8F6D4 /* jeff_portrait.png */; };
 		8483964824364E3400A8F6D4 /* Me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8483964724364E3400A8F6D4 /* Me.jpg */; };
+		8483964A243773E400A8F6D4 /* IMG_4106.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 84839649243773E300A8F6D4 /* IMG_4106.JPG */; };
 		DE40644EC1AFC49709314871 /* Pods_AWSRekognitionKjayShieu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13E26979B71E1B61F313518D /* Pods_AWSRekognitionKjayShieu.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		8483963F2433854F00A8F6D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8483964524362C7100A8F6D4 /* jeff_portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jeff_portrait.png; sourceTree = "<group>"; };
 		8483964724364E3400A8F6D4 /* Me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Me.jpg; sourceTree = "<group>"; };
+		84839649243773E300A8F6D4 /* IMG_4106.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_4106.JPG; sourceTree = "<group>"; };
 		DEA96885918A84621847BE2C /* Pods-AWSRekognitionKjayShieu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AWSRekognitionKjayShieu.release.xcconfig"; path = "Target Support Files/Pods-AWSRekognitionKjayShieu/Pods-AWSRekognitionKjayShieu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 			children = (
 				8483964524362C7100A8F6D4 /* jeff_portrait.png */,
 				8483964724364E3400A8F6D4 /* Me.jpg */,
+				84839649243773E300A8F6D4 /* IMG_4106.JPG */,
 				848396312433854900A8F6D4 /* AppDelegate.swift */,
 				848396332433854900A8F6D4 /* SceneDelegate.swift */,
 				848396352433854900A8F6D4 /* ViewController.swift */,
@@ -159,6 +162,7 @@
 			files = (
 				8483964824364E3400A8F6D4 /* Me.jpg in Resources */,
 				8483963E2433854F00A8F6D4 /* LaunchScreen.storyboard in Resources */,
+				8483964A243773E400A8F6D4 /* IMG_4106.JPG in Resources */,
 				8483963B2433854F00A8F6D4 /* Assets.xcassets in Resources */,
 				848396392433854900A8F6D4 /* Main.storyboard in Resources */,
 				8483964624362C7100A8F6D4 /* jeff_portrait.png in Resources */,
