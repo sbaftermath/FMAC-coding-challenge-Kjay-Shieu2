@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSRekognition
+import os.log
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -21,6 +22,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var imagePicked = 0
     
+    //overrided to convert default images to jpeg and send to AWS
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,16 +31,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let Image2:Data = secondImage.image!.jpegData(compressionQuality: 0.2)!
         sendImageToRekognition(Image1Data: Image1, Image2Data: Image2)
     }
-    
-    func sourceOfPhotos(sourceType: UIImagePickerController.SourceType){
-        if UIImagePickerController.isSourceTypeAvailable(sourceType){
-            let myPickerController = UIImagePickerController()
-            myPickerController.delegate = self;
-            myPickerController.sourceType = sourceType
-            self.present(myPickerController, animated: true, completion: nil)
-        }
-    }
-    
+        
+    //function to open up camera and to change the image of the corresponding image view
     @IBAction func CameraOpen(_ sender: Any) {
         let currentSelectedBtn = (sender as! UIButton)
         if(currentSelectedBtn.currentTitle == "Take Source Image"){
@@ -53,6 +47,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(pickerController, animated: true)
     }
     
+    //functino to open photo lobrary and to chang the image of the corresponding image view
     @IBAction func PhotoLibraryOpen(_ sender: Any) {
         let currentSelectedBtn = (sender as! UIButton)
         if(currentSelectedBtn.currentTitle == "Choose Source Image"){
@@ -66,7 +61,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(pickerController, animated: true)
     }
     
-    // MARK: - UIImagePickerControllerDelegate
+    //image picker controller that will update the images and send to AWS
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         dismiss(animated: true)
         
@@ -88,10 +83,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
-    //MARK: - AWS Methods
+    //Function that will call the AWS compare faces API
     func sendImageToRekognition(Image1Data: Data, Image2Data: Data){
         
-        //Delete older labels or buttons
+        //formats the data recieved and creates a AWS Rekognition request for compare faces
         rekognitionObject = AWSRekognition.default()
         let Image1AWS = AWSRekognitionImage()
         Image1AWS?.bytes = Image1Data
@@ -101,22 +96,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         faceRequest?.sourceImage = Image1AWS
         faceRequest?.targetImage = Image2AWS
         
+        //checks to see if the resposnse contains a result and handles errors
         rekognitionObject?.compareFaces(faceRequest!){
             (result, error) in
             if error != nil{
-                print(error!)
+                os_log("Error has occured")
                 return
             }
             if result != nil {
                 print(result!)
-                //1. First we check if there are any celebrities in the response
+                //checks if there are any similar faces in the response
                 if ((result!.faceMatches!.count) > 0){
                     
-                    //2. Celebrities were found. Lets iterate through all of them
+                    //iterates through the matched faces
                     for (index, faceImage) in result!.faceMatches!.enumerated(){
                         
-                        //Check the confidence value returned by the API for each celebirty identified
-                        if(faceImage.similarity!.intValue > 10){ //Adjust the confidence value to whatever you are comfortable with
+                        //Check the similarity value returned by the API for each matched face
+                        if(faceImage.similarity!.intValue > 10){
+                            
+                            //Displays the similarity to UI
                             DispatchQueue.main.async {
                                 [weak self] in
                                 self!.similarityScoreLabel.text = "Similarity Score: \(faceImage.similarity!.uintValue)%"
@@ -126,9 +124,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         
                     }
                 }
-                    //If there were no celebrities in the image, lets check if there were any faces (who, granted, could one day become celebrities)
+                    //if the faces are unmatched display message to UI
                 else if ((result!.unmatchedFaces!.count) > 0){
-                    //Faces are present. Point them out in the Image (left as an exercise for the reader)
+                    
                     DispatchQueue.main.async {
                         [weak self] in
                         self!.similarityScoreLabel.text = "Faces are not similar"
@@ -137,11 +135,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
                 else{
                     //No faces were found (presumably no people were found either)
-                    print("No faces in this pic")
+                    DispatchQueue.main.async {
+                    [weak self] in
+                    self!.similarityScoreLabel.text = "Faces are not similar"
+                    }
                 }
             }
             else{
-                print("No Result")
+                os_log("No Result")
             }
         }
         
